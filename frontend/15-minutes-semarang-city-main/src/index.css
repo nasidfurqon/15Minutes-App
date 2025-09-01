@@ -1,0 +1,98 @@
+/* Import style dasar Leaflet untuk peta */
+@import "leaflet/dist/leaflet.css";
+
+/* Import responsive utilities */
+@import "./styles/responsive.css";
+
+/* Arahan (directives) Tailwind CSS */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom styles untuk leaflet pop-up agar sesuai tema */
+.leaflet-popup-content-wrapper {
+	@apply rounded-lg bg-white bg-opacity-90 backdrop-blur-sm shadow-lg;
+}
+
+.leaflet-popup-content {
+	@apply text-brand-dark-blue;
+}
+
+.leaflet-popup-tip {
+	@apply bg-white bg-opacity-90 backdrop-blur-sm;
+}
+
+/* Custom styles untuk facility icons */
+.custom-facility-icon {
+	filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
+	transition: transform 0.2s ease;
+}
+
+.custom-facility-icon:hover {
+	transform: scale(1.1);
+}
+
+.custom-dot-icon {
+	border: none !important;
+	background: transparent !important;
+}
+
+/* Custom popup styling */
+.custom-popup .leaflet-popup-content-wrapper {
+	border-radius: 12px;
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.custom-popup .leaflet-popup-content {
+	margin: 0;
+	padding: 0;
+}
+
+.custom-popup .leaflet-popup-tip {
+	background: white;
+}
+
+/* Global styles to prevent horizontal scrolling */
+html,
+body {
+	overflow-x: hidden;
+	max-width: 100vw;
+}
+
+#root {
+	overflow-x: hidden;
+	max-width: 100vw;
+}
+
+/* Ensure all direct children of root don't cause overflow */
+#root > * {
+	max-width: 100vw;
+	overflow-x: hidden;
+}
+
+/* Additional text handling for better readability */
+.main-page-title,
+.main-page-text {
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+/* Ensure buttons don't cause overflow */
+button {
+	max-width: 100%;
+	box-sizing: border-box;
+}
+
+/* Responsive text size adjustments */
+@media (max-width: 320px) {
+	.main-page-text {
+		font-size: clamp(12px, 4vw, 16px) !important;
+	}
+}
+
+@media (min-width: 1600px) {
+	.main-page-text {
+		font-size: clamp(18px, 1.5vw, 24px) !important;
+	}
+}

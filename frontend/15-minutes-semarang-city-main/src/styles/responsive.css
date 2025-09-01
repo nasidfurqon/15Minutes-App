@@ -1,0 +1,597 @@
+/* ================================================================================================
+   RESPONSIVE DESIGN UTILITIES
+   File ini berisi semua utilitas untuk membuat tampilan responsif yang dapat beradaptasi 
+   dengan berbagai ukuran layar dari desktop hingga mobile
+   ================================================================================================ */
+
+/* Fluid typography and spacing using clamp() - Menggunakan fungsi clamp() untuk tipografi 
+   dan spacing yang fleksibel sesuai ukuran layar */
+
+/* ================================================================================================
+   GLOBAL TRANSITIONS - TRANSISI GLOBAL
+   ================================================================================================ */
+
+/* Global smooth transitions for responsive changes - Transisi halus untuk perubahan responsif */
+* {
+	/* Transisi halus untuk font-size ketika terjadi perubahan ukuran layar - durasi 0.3s dengan easing */
+	transition: font-size 0.3s ease,
+		/* Transisi halus untuk padding ketika terjadi perubahan ukuran layar */
+			padding 0.3s ease,
+		/* Transisi halus untuk margin ketika terjadi perubahan ukuran layar */
+			margin 0.3s ease;
+}
+
+/* ================================================================================================
+   FONT UTILITIES - UTILITAS FONT
+   ================================================================================================ */
+
+/* Font utility class untuk menggunakan font Poppins - dapat digunakan di komponen React */
+.font-poppins {
+	/* Menggunakan font Poppins dari Google Fonts dengan fallback ke sans-serif */
+	font-family: "Poppins", sans-serif;
+}
+
+/* Font stack untuk sistem Android - optimasi font untuk perangkat mobile Android */
+.android-font {
+	/* Font stack yang dioptimalkan untuk Android dan sistem operasi lainnya */
+	font-family: system-ui, /* Font sistem default */ -apple-system,
+		/* Font sistem Apple (iOS/macOS) */ "Segoe UI",
+		/* Font default Windows */ Roboto,
+		/* Font default Android */ "Helvetica Neue",
+		/* Font alternatif Apple */ Arial, /* Font fallback universal */ "Noto Sans",
+		/* Font Google untuk internasional */ sans-serif; /* Fallback final ke sans-serif */
+}
+
+/* Font stack untuk sistem iOS - optimasi font untuk perangkat mobile iOS */
+.ios-font {
+	/* Menggunakan font SF Pro untuk sistem iOS dengan fallback ke sans-serif */
+	font-family: "-apple-system", "SF Pro Display", sans-serif;
+}
+
+/* ================================================================================================
+   RESPONSIVE SPACING UTILITIES - UTILITAS SPACING RESPONSIF
+   ================================================================================================ */
+
+/* Gap responsif untuk layout grid dan flexbox */
+.responsive-gap {
+	/* Gap yang responsif: minimum 16px, 2% dari viewport width, maksimal 32px */
+	gap: clamp(16px, 2vw, 32px);
+}
+
+/* Gap yang lebih kecil untuk mobile - optimasi touch interface */
+.responsive-gap-mobile {
+	/* Gap untuk mobile: minimum 12px, 3% dari viewport width, maksimal 24px */
+	gap: clamp(12px, 3vw, 24px);
+}
+
+/* Padding responsif untuk elemen-elemen umum */
+.responsive-padding {
+	/* Padding yang responsif: minimum 16px, 2% dari viewport width, maksimal 32px */
+	padding: clamp(16px, 2vw, 32px);
+}
+
+/* Padding yang lebih kecil untuk mobile - optimasi touch interface */
+.responsive-padding-mobile {
+	/* Padding untuk mobile: minimum 12px, 3% dari viewport width, maksimal 20px */
+	padding: clamp(12px, 3vw, 20px);
+}
+
+/* Margin responsif untuk elemen-elemen umum */
+.responsive-margin {
+	/* Margin yang responsif: minimum 16px, 2% dari viewport width, maksimal 32px */
+	margin: clamp(16px, 2vw, 32px);
+}
+
+/* Margin yang lebih kecil untuk mobile - optimasi spacing pada layar kecil */
+.responsive-margin-mobile {
+	/* Margin untuk mobile: minimum 8px, 2% dari viewport width, maksimal 16px */
+	margin: clamp(8px, 2vw, 16px);
+}
+
+/* ================================================================================================
+   MAIN PAGE SPECIFIC UTILITIES - UTILITAS KHUSUS HALAMAN UTAMA
+   ================================================================================================ */
+
+/* Container utama untuk halaman main - mengontrol overflow dan ukuran maksimal */
+.main-page-container {
+	/* Menyembunyikan scrollbar horizontal untuk mencegah overflow ke samping */
+	overflow-x: hidden;
+	/* Lebar container mengikuti parent (100%) */
+	width: 100%;
+	/* Lebar maksimal tidak boleh melebihi viewport width */
+	max-width: 100vw;
+}
+
+/* Styling untuk deskripsi di halaman utama - mengontrol lebar dan text wrapping */
+.main-page-description {
+	/* Lebar maksimal: pilih yang terkecil antara 850px atau (100vw - padding responsif) */
+	max-width: min(850px, calc(100vw - clamp(40px, 8vw, 120px))) !important;
+	/* Lebar aktual: sama dengan max-width untuk konsistensi */
+	width: min(850px, calc(100vw - clamp(40px, 8vw, 120px))) !important;
+	/* Memungkinkan text wrapping pada kata yang panjang */
+	overflow-wrap: break-word;
+	/* Properti legacy untuk browser lama - sama dengan overflow-wrap */
+	word-wrap: break-word;
+	/* Hyphenation otomatis untuk WebKit browsers (Safari, Chrome) */
+	-webkit-hyphens: auto;
+	/* Hyphenation otomatis untuk browsers modern */
+	hyphens: auto;
+}
+
+/* ================================================================================================
+   TEXT OVERFLOW PREVENTION UTILITIES - UTILITAS PENCEGAHAN OVERFLOW TEKS
+   ================================================================================================ */
+
+/* Styling untuk judul halaman utama - mencegah overflow teks */
+.main-page-title {
+	/* Memungkinkan text wrapping pada kata yang panjang */
+	overflow-wrap: break-word;
+	/* Properti legacy untuk browser lama */
+	word-wrap: break-word;
+	/* Hyphenation otomatis untuk WebKit browsers */
+	-webkit-hyphens: auto;
+	/* Hyphenation otomatis untuk browsers modern */
+	hyphens: auto;
+	/* Lebar maksimal tidak boleh melebihi container parent */
+	max-width: 100%;
+}
+
+/* Styling untuk teks umum di halaman utama - optimasi text wrapping */
+.main-page-text {
+	/* Memungkinkan text wrapping pada kata yang panjang */
+	overflow-wrap: break-word;
+	/* Properti legacy untuk browser lama */
+	word-wrap: break-word;
+	/* Hyphenation otomatis untuk WebKit browsers */
+	-webkit-hyphens: auto;
+	/* Hyphenation otomatis untuk browsers modern */
+	hyphens: auto;
+	/* Memaksa word break jika kata terlalu panjang */
+	word-break: break-word;
+}
+
+/* ================================================================================================
+   RESPONSIVE POSITIONING UTILITIES - UTILITAS POSISI RESPONSIF
+   ================================================================================================ */
+
+/* Posisi responsif untuk tombol aksi utama */
+.responsive-button-position {
+	/* Posisi horizontal: dari kiri viewport, responsif berdasarkan ukuran layar */
+	/* Minimum: 50vw - 140px, tengah: 73.6vw, maksimal: 1060px dari kiri */
+	left: clamp(calc(50vw - 140px), 73.6vw, 1060px);
+	/* Posisi vertikal: minimum 460px, tengah: 48.9% dari viewport height, maksimal: 704px dari atas */
+	top: clamp(460px, 48.9vh, 704px);
+	/* Lebar tombol: minimum 280px, tengah: 23.96% dari viewport width, maksimal: 345px */
+	width: clamp(280px, 23.96vw, 345px);
+	/* Tinggi tombol: minimum 50px, tengah: 5.56% dari viewport height, maksimal: 80px */
+	height: clamp(50px, 5.56vh, 80px);
+}
+
+/* Posisi responsif untuk judul halaman utama */
+.responsive-title-position {
+	/* Posisi horizontal: minimum 20px, tengah: 8.3% dari viewport width, maksimal: 120px dari kiri */
+	left: clamp(20px, 8.3vw, 120px);
+	/* Posisi vertikal: minimum 60px, tengah: 12.5% dari viewport height, maksimal: 180px dari atas */
+	top: clamp(60px, 12.5vh, 180px);
+	/* Lebar judul: minimum 280px, tengah: 36% dari viewport width, maksimal: 520px */
+	width: clamp(280px, 36vw, 520px);
+	/* Tinggi judul: otomatis menyesuaikan konten, tengah: 13.2% dari viewport height, maksimal: 190px */
+	height: clamp(auto, 13.2vh, 190px);
+}
+
+/* Posisi responsif untuk deskripsi halaman utama */
+.responsive-description-position {
+	/* Posisi horizontal: minimum 20px, tengah: 8.3% dari viewport width, maksimal: 120px dari kiri */
+	left: clamp(20px, 8.3vw, 120px);
+	/* Posisi vertikal: minimum 240px, tengah: 29.2% dari viewport height, maksimal: 420px dari atas */
+	top: clamp(240px, 29.2vh, 420px);
+	/* Lebar deskripsi: pilih yang terkecil antara 850px atau (100vw - padding responsif) */
+	width: min(850px, calc(100vw - clamp(40px, 8vw, 120px)));
+	/* Lebar maksimal: sama dengan width untuk konsistensi */
+	max-width: min(850px, calc(100vw - clamp(40px, 8vw, 120px)));
+	/* Tinggi otomatis menyesuaikan konten */
+	height: auto;
+	/* Tinggi minimum: 180px, tengah: 24.3% dari viewport height, maksimal: 350px */
+	min-height: clamp(180px, 24.3vh, 350px);
+}
+
+/* ================================================================================================
+   SIDE PANEL ANIMATIONS - ANIMASI PANEL SAMPING
+   Kelas-kelas ini mengatur animasi untuk panel samping (side panel) saat muncul dan menghilang
+   ================================================================================================ */
+
+/* Animasi masuk panel samping - state awal (tersembunyi) */
+.side-panel-enter {
+	/* Panel dimulai dari posisi 100% ke kanan (tersembunyi di luar layar) */
+	transform: translateX(100%);
+}
+
+/* Animasi masuk panel samping - state aktif (terlihat) */
+.side-panel-enter-active {
+	/* Panel bergerak ke posisi normal (translateX(0)) */
+	transform: translateX(0);
+	/* Transisi smooth dengan durasi 300ms dan easing ease-in-out */
+	transition: transform 300ms ease-in-out;
+}
+
+/* Animasi keluar panel samping - state awal (terlihat) */
+.side-panel-exit {
+	/* Panel dimulai dari posisi normal (translateX(0)) */
+	transform: translateX(0);
+}
+
+/* Animasi keluar panel samping - state aktif (tersembunyi) */
+.side-panel-exit-active {
+	/* Panel bergerak ke posisi 100% ke kanan (tersembunyi di luar layar) */
+	transform: translateX(100%);
+	/* Transisi smooth dengan durasi 300ms dan easing ease-in-out */
+	transition: transform 300ms ease-in-out;
+}
+
+/* ================================================================================================
+   PANEL MINIMIZE/MAXIMIZE ANIMATIONS - ANIMASI MINIMIZE/MAXIMIZE PANEL
+   ================================================================================================ */
+
+/* Kelas untuk animasi minimize panel */
+.panel-minimize {
+	/* Menggunakan keyframe animation 'minimizePanel' dengan durasi 300ms */
+	animation: minimizePanel 300ms ease-in-out;
+}
+
+/* Kelas untuk animasi maximize panel */
+.panel-maximize {
+	/* Menggunakan keyframe animation 'maximizePanel' dengan durasi 300ms */
+	animation: maximizePanel 300ms ease-in-out;
+}
+
+/* Keyframe untuk animasi minimize panel */
+@keyframes minimizePanel {
+	/* State awal: panel memiliki lebar 33.333333% (1/3 dari container) */
+	from {
+		width: 33.333333%;
+	}
+	/* State akhir: panel memiliki lebar 64px (ukuran minimize) */
+	to {
+		width: 64px;
+	}
+}
+
+/* Keyframe untuk animasi maximize panel */
+@keyframes maximizePanel {
+	/* State awal: panel memiliki lebar 64px (ukuran minimize) */
+	from {
+		width: 64px;
+	}
+	/* State akhir: panel memiliki lebar 33.333333% (1/3 dari container) */
+	to {
+		width: 33.333333%;
+	}
+}
+
+/* ================================================================================================
+   MEDIA QUERIES - BREAKPOINTS RESPONSIF
+   Bagian ini mengatur styling untuk berbagai ukuran layar dari desktop hingga mobile
+   ================================================================================================ */
+
+/* ================================================================================================
+   LARGE DESKTOP SCREENS - LAYAR DESKTOP BESAR (1440px ke atas)
+   Mengoptimalkan tampilan untuk layar besar sesuai dengan desain Figma
+   ================================================================================================ */
+
+/* Layar besar (1440px ke atas) - sesuai dengan desain Figma */
+@media (min-width: 1440px) {
+	/* Posisi judul untuk layar besar - positioning absolut sesuai desain */
+	.responsive-title-position {
+		/* Posisi horizontal: 120px dari kiri layar */
+		left: 120px !important;
+		/* Posisi vertikal: 180px dari atas layar */
+		top: 180px !important;
+		/* Lebar judul: 520px */
+		width: 520px !important;
+		/* Tinggi judul: 190px */
+		height: 190px !important;
+	}
+
+	/* Posisi deskripsi untuk layar besar */
+	.responsive-description-position {
+		/* Posisi horizontal: 120px dari kiri layar */
+		left: 120px !important;
+		/* Posisi vertikal: 420px dari atas layar */
+		top: 420px !important;
+		/* Lebar deskripsi: 1370px (sesuai desain Figma) */
+		width: 1370px !important;
+		/* Lebar maksimal: sama dengan width */
+		max-width: 1370px !important;
+		/* Tinggi deskripsi: 350px */
+		height: 350px !important;
+	}
+
+	/* Posisi tombol untuk layar besar */
+	.responsive-button-position {
+		/* Posisi horizontal: 1060px dari kiri layar */
+		left: 1060px !important;
+		/* Posisi vertikal: 704px dari atas layar */
+		top: 704px !important;
+		/* Lebar tombol: 345px */
+		width: 345px !important;
+		/* Tinggi tombol: 80px */
+		height: 80px !important;
+	}
+}
+
+/* ================================================================================================
+   DESKTOP SCREENS - LAYAR DESKTOP (769px ke atas)
+   Styling untuk layar desktop yang mempertahankan layout asli
+   ================================================================================================ */
+
+/* Desktop styles - mempertahankan layout asli untuk layar besar */
+@media (min-width: 769px) {
+	/* Content wrapper untuk desktop - layout flexbox */
+	.content-wrapper {
+		/* Menggunakan flexbox untuk layout */
+		display: flex !important;
+		/* Arah flex: kolom vertikal */
+		flex-direction: column !important;
+		/* Align items ke flex-end (kanan) */
+		align-items: flex-end !important;
+	}
+
+	/* Description box untuk desktop */
+	.description-box {
+		/* Lebar penuh dari container */
+		width: 100% !important;
+	}
+
+	/* Teks deskripsi untuk desktop */
+	.description-text {
+		/* Menggunakan font Poppins untuk konsistensi */
+		font-family: "Poppins", sans-serif !important;
+	}
+
+	/* Tombol aksi untuk desktop */
+	.action-button {
+		/* Lebar otomatis menyesuaikan konten */
+		width: auto !important;
+		/* Menggunakan font Poppins untuk konsistensi */
+		font-family: "Poppins", sans-serif !important;
+		/* Font size yang proporsional dengan layout desktop */
+		/* Minimum: 16px, tengah: 1.1% dari viewport width, maksimal: 18px */
+		font-size: clamp(16px, 1.1vw, 18px) !important;
+		/* Font weight semi-bold untuk readability */
+		font-weight: 600 !important;
+	}
+
+	/* Judul halaman utama untuk desktop */
+	.main-page-container h1 {
+		/* Menggunakan font Poppins untuk konsistensi */
+		font-family: "Poppins", sans-serif !important;
+		/* Alignment kiri untuk judul */
+		text-align: left !important;
+	}
+}
+
+/* ================================================================================================
+   TABLET SCREENS - LAYAR TABLET (769px - 1024px)
+   Styling untuk layar tablet dengan optimasi untuk ukuran menengah
+   ================================================================================================ */
+
+/* Tablet view - layar menengah dengan optimasi khusus */
+@media (max-width: 1024px) and (min-width: 769px) {
+	/* Posisi deskripsi untuk tablet - menyesuaikan dengan lebar layar */
+	.responsive-description-position {
+		/* Lebar maksimal: viewport width dikurangi padding responsif */
+		/* Minimum padding: 60px, tengah: 10vw, maksimal: 100px */
+		max-width: calc(100vw - clamp(60px, 10vw, 100px)) !important;
+		/* Lebar aktual: sama dengan max-width */
+		width: calc(100vw - clamp(60px, 10vw, 100px)) !important;
+	}
+
+	/* Content wrapper untuk tablet */
+	.content-wrapper {
+		/* Margin kiri: minimum 20px, tengah: 5vw, maksimal: 40px */
+		left: clamp(20px, 5vw, 40px) !important;
+		/* Margin kanan: minimum 20px, tengah: 5vw, maksimal: 40px */
+		right: clamp(20px, 5vw, 40px) !important;
+	}
+
+	/* Teks deskripsi untuk tablet */
+	.description-text {
+		/* Font size untuk tablet: minimum 14px, tengah: 2.2vw, maksimal: 20px */
+		font-size: clamp(14px, 2.2vw, 20px) !important;
+	}
+
+	/* Tombol aksi untuk tablet */
+	.action-button {
+		/* Font size yang lebih besar dan proporsional untuk tablet */
+		/* Minimum: 16px, tengah: 2.2vw, maksimal: 20px */
+		font-size: clamp(16px, 2.2vw, 20px) !important;
+		/* Font weight semi-bold */
+		font-weight: 600 !important;
+		/* Padding horizontal: minimum 20px, tengah: 3vw, maksimal: 32px */
+		padding: 0 clamp(20px, 3vw, 32px) !important;
+	}
+}
+
+/* ================================================================================================
+   MOBILE SCREENS - LAYAR MOBILE (768px ke bawah)
+   Styling yang dioptimalkan untuk layar mobile dengan layout vertikal
+   ================================================================================================ */
+
+/* Mobile view - dioptimalkan untuk layout mobile */
+@media (max-width: 768px) {
+	/* Posisi judul dan deskripsi untuk mobile */
+	.responsive-title-position,
+	.responsive-description-position {
+		/* Posisi horizontal: 20px dari kiri layar */
+		left: 20px !important;
+		/* Posisi horizontal: 20px dari kanan layar */
+		right: 20px !important;
+		/* Lebar: viewport width dikurangi 40px (20px kiri + 20px kanan) */
+		width: calc(100vw - 40px) !important;
+		/* Lebar maksimal: sama dengan width */
+		max-width: calc(100vw - 40px) !important;
+		/* Alignment center untuk mobile */
+		text-align: center;
+	}
+
+	/* Posisi deskripsi khusus untuk mobile */
+	.responsive-description-position {
+		/* Posisi vertikal: minimum 250px, tengah: 35vh, maksimal: 400px */
+		top: clamp(250px, 35vh, 400px) !important;
+	}
+
+	/* Posisi tombol untuk mobile */
+	.responsive-button-position {
+		/* Posisi horizontal: center (50% dari kiri) */
+		left: 50% !important;
+		/* Transform untuk center alignment */
+		transform: translateX(-50%) !important;
+		/* Posisi vertikal: otomatis (tidak ditentukan) */
+		top: auto !important;
+		/* Jarak dari bawah: minimum 40px, tengah: 10vh, maksimal: 80px */
+		bottom: clamp(40px, 10vh, 80px);
+		/* Lebar tombol: minimum 250px, tengah: 80vw, maksimal: 300px */
+		width: clamp(250px, 80vw, 300px) !important;
+	}
+
+	/* ================================================================================================
+     MOBILE CONTENT WRAPPER - WRAPPER KONTEN MOBILE
+     ================================================================================================ */
+
+	/* Content wrapper khusus untuk mobile */
+	.content-wrapper {
+		/* Layout flexbox vertikal */
+		display: flex !important;
+		flex-direction: column !important;
+		/* Align items stretch untuk lebar penuh */
+		align-items: stretch !important;
+		/* Gap antar elemen: minimum 20px, tengah: 5vw, maksimal: 32px */
+		gap: clamp(20px, 5vw, 32px) !important;
+		/* Posisi vertikal: minimum 160px, tengah: 22vh, maksimal: 260px */
+		top: clamp(160px, 22vh, 260px) !important;
+		/* Margin kiri: minimum 24px, tengah: 6vw, maksimal: 40px */
+		left: clamp(24px, 6vw, 40px) !important;
+		/* Margin kanan: minimum 24px, tengah: 6vw, maksimal: 40px */
+		right: clamp(24px, 6vw, 40px) !important;
+	}
+
+	/* ================================================================================================
+     MOBILE DESCRIPTION BOX - KOTAK DESKRIPSI MOBILE
+     ================================================================================================ */
+
+	/* Description box untuk mobile */
+	.description-box {
+		/* Margin bottom: 0 untuk mobile layout */
+		margin-bottom: 0 !important;
+		/* Padding yang lebih besar untuk mobile readability */
+		/* Minimum: 20px, tengah: 5vw, maksimal: 32px */
+		padding: clamp(20px, 5vw, 32px) !important;
+		/* Border radius untuk mobile */
+		border-radius: 12px !important;
+	}
+
+	/* ================================================================================================
+     MOBILE DESCRIPTION TEXT - TEKS DESKRIPSI MOBILE
+     ================================================================================================ */
+
+	/* Teks deskripsi untuk mobile */
+	.description-text {
+		/* Alignment justify untuk mobile readability */
+		text-align: justify !important;
+		/* Font size yang lebih besar untuk mobile readability */
+		/* Minimum: 16px, tengah: 4vw, maksimal: 24px */
+		font-size: clamp(16px, 4vw, 24px) !important;
+		/* Line height untuk readability optimal */
+		line-height: 1.5 !important;
+		/* Padding: 0 untuk mobile */
+		padding: 0 !important;
+		/* Margin: 0 untuk mobile */
+		margin: 0 !important;
+		/* Font Poppins untuk konsistensi dengan desktop */
+		font-family: "Poppins", sans-serif !important;
+		/* Font weight medium */
+		font-weight: 500 !important;
+		/* Warna teks sesuai design system */
+		color: #213448 !important;
+	}
+
+	/* ================================================================================================
+     MOBILE ACTION BUTTON - TOMBOL AKSI MOBILE
+     ================================================================================================ */
+
+	/* Tombol aksi untuk mobile */
+	.action-button {
+		/* Tombol mengikuti lebar penuh dari container */
+		width: 100% !important;
+		/* Align self stretch untuk mengisi container */
+		align-self: stretch !important;
+		/* Padding yang lebih besar untuk mobile touch friendly */
+		/* Vertical padding: minimum 16px, tengah: 4vw, maksimal: 20px */
+		/* Horizontal padding: minimum 24px, tengah: 6vw, maksimal: 40px */
+		padding: clamp(16px, 4vw, 20px) clamp(24px, 6vw, 40px) !important;
+		/* Tinggi tombol: minimum 52px, tengah: 13vw, maksimal: 64px */
+		height: clamp(52px, 13vw, 64px) !important;
+		/* Font size yang lebih besar untuk mobile readability dan proporsionalitas */
+		/* Minimum: 18px, tengah: 4.5vw, maksimal: 22px */
+		font-size: clamp(18px, 4.5vw, 22px) !important;
+		/* Border radius untuk mobile */
+		border-radius: 50px !important;
+		/* Font Poppins untuk konsistensi dengan desktop */
+		font-family: "Poppins", sans-serif !important;
+		/* Font weight bold untuk tombol */
+		font-weight: 700 !important;
+		/* Prevent text wrapping */
+		white-space: nowrap !important;
+		/* Margin top = 2x margin antara header dan teks box untuk rasio yang tepat */
+		/* Minimum: 16px, tengah: 4vw, maksimal: 32px */
+		margin-top: clamp(16px, 4vw, 32px) !important;
+		/* Gap untuk spacing internal */
+		gap: clamp(8px, 2vw, 12px) !important;
+	}
+
+	/* ================================================================================================
+     MOBILE BUTTON ICON - IKON TOMBOL MOBILE
+     ================================================================================================ */
+
+	/* Ikon SVG dalam tombol aksi mobile */
+	.action-button svg {
+		/* Lebar ikon: minimum 20px, tengah: 5vw, maksimal: 28px */
+		width: clamp(20px, 5vw, 28px) !important;
+		/* Tinggi ikon: minimum 20px, tengah: 5vw, maksimal: 28px */
+		height: clamp(20px, 5vw, 28px) !important;
+	}
+
+	/* ================================================================================================
+     MOBILE TITLE - JUDUL MOBILE
+     ================================================================================================ */
+
+	/* Judul halaman utama untuk mobile */
+	.main-page-container h1 {
+		/* Posisi vertikal: minimum 40px, tengah: 8vh, maksimal: 80px */
+		top: clamp(40px, 8vh, 80px) !important;
+		/* Margin kiri: minimum 24px, tengah: 6vw, maksimal: 40px */
+		left: clamp(24px, 6vw, 40px) !important;
+		/* Margin kanan: minimum 24px, tengah: 6vw, maksimal: 40px */
+		right: clamp(24px, 6vw, 40px) !important;
+		/* Lebar otomatis menyesuaikan konten */
+		width: auto !important;
+		/* Lebar maksimal: viewport width dikurangi margin kiri-kanan */
+		max-width: calc(100vw - clamp(48px, 12vw, 80px)) !important;
+		/* Alignment kiri seperti desktop, bukan center */
+		text-align: left !important;
+		/* Font size yang lebih besar untuk mobile readability */
+		/* Minimum: 36px, tengah: 8vw, maksimal: 56px */
+		font-size: clamp(36px, 8vw, 56px) !important;
+		/* Line height untuk readability optimal */
+		line-height: 1.1 !important;
+		/* Font Poppins untuk konsistensi dengan desktop */
+		font-family: "Poppins", sans-serif !important;
+		/* Font weight bold untuk judul */
+		font-weight: 700 !important;
+		/* Warna teks sesuai design system */
+		color: #213448 !important;
+		/* Margin bottom = 1.25x margin tombol (20px * 1.25 = 10px) */
+		/* Minimum: 10px, tengah: 2.5vw, maksimal: 20px */
+		margin-bottom: clamp(10px, 2.5vw, 20px) !important;
+	}
+}
