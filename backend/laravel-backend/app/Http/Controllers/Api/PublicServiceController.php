@@ -14,7 +14,7 @@ class PublicServiceController extends Controller
         return response()->json(PublicService::all());
     }
 
-    public function store(Request $request) {
+    public function add(Request $request) {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'category_id' => 'required|exists:service_categories,id',
@@ -29,8 +29,8 @@ class PublicServiceController extends Controller
             'is_active' => 'boolean'
         ]);
 
-        $service = PublicService::create($validated);
-        return response()->json($service, 201);
+        $service = DB::table('public_services')->insertGetId($validated);
+        return response()->json(['messages' => 'Service added successfully', "id" => $service], 201);
     }
 
     public function show($id) {

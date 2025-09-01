@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 
 class KelurahanController extends Controller
 {
@@ -55,6 +56,23 @@ class KelurahanController extends Controller
     public function count(){
         return response()->json(['data' => DB::table('kelurahans')->count()]);
     }
+
+    public function add(Request $request)
+    {
+        $kelurahanId = DB::table('kelurahans')->insertGetId(
+            [
+                'name'=> $request->input('name', null),
+                'district_id' => $request->input('district_id', null),
+                'polygon' => $request->input('polygon', null),
+            ]
+        );
+        
+         return response()->json([
+            'message' => 'Kelurahan added successfully',
+            'id'      => $kelurahanId
+        ], 201);
+    }
+    
     public function showInfo($id)
     {
         $kelurahan = DB::table('kelurahans')

@@ -14,21 +14,19 @@ class DistrictController extends Controller
         return response()->json(District::all());
     }
 
-    public function store(Request $request)
+    public function add(Request $request)   
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:100',
-            'district_code' => 'nullable|string|max:10',
-            'area_km2' => 'nullable|numeric',
-            'population' => 'nullable|integer',
-            'population_density' => 'nullable|numeric',
-            'boundary_polygon' => 'nullable', // tipe geometry, bisa WKT/GeoJSON
-            'center_point' => 'nullable',     // tipe point, bisa WKT/GeoJSON
+        $districtId = DB::table('districts')->insertGetId([
+            'name'        => $request->input('name', null),
+            'persentase_penduduk' => $request->input('persentase_penduduk', null),
+            'kepadatan_penduduk_per_km2'        => $request->input('kepadatan_penduduk_per_km2', null),
+            'polygon'        => $request->input('polygon', null),
         ]);
 
-        $district = District::create($validated);
-
-        return response()->json($district, 201);
+        return response()->json([
+            'message' => 'District added successfully',
+            'id'      => $districtId
+        ], 201);
     }
 
     /**

@@ -46,6 +46,12 @@ Route::get('/count/districts', [DistrictController::class, 'count']);
 Route::get('/count/kelurahans', [KelurahanController::class, 'count']);
 Route::get('/count/public_services', [PublicServiceController::class, 'count']);
 Route::get('/count/service_categories', [ServiceCategoryController::class, 'count']);
+
+Route::post('/add/districts', [DistrictController::class, 'add']); 
+Route::post('/add/kelurahans', [KelurahanController::class, 'add']); 
+Route::post('/add/public_services', [PublicServiceController::class, 'add']);
+Route::post('/add/service_categories', [ServiceCategoryController::class, 'add']);
+
 // Endpoint untuk kelurahan berdasarkan NAMA
 // Mengarah ke fungsi baru: showByName
 Route::get('/kelurahans/{name}', [KelurahanController::class, 'showByName']);
