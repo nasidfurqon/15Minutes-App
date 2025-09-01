@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\ServiceReviewController;
 use App\Http\Controllers\Api\UserSearchController;
 use App\Http\Controllers\Api\WalkabilityZoneController;
 use App\Http\Controllers\Api\KelurahanController;
+use App\Models\District;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +35,10 @@ Route::post('/region-info', [App\Http\Controllers\Api\DistrictController::class,
 // Mengarah ke fungsi baru: showByName
 Route::get('/districts/{name}', [DistrictController::class, 'showByName']);
 Route::get('/districts/{id}/detail', [DistrictController::class, 'detail']);
+Route::get('/list/districts', [DistrictController::class, 'list']);
+Route::get('/list/kelurahans', [KelurahanController::class, 'list']);
+Route::get('/list/public_services', [PublicServiceController::class, 'list']);
+Route::get('/list/service_categories', [ServiceCategoryController::class, 'list']);
 
 // Endpoint untuk kelurahan berdasarkan NAMA
 // Mengarah ke fungsi baru: showByName
@@ -48,4 +53,3 @@ Route::apiResource('service-images', ServiceImageController::class);
 Route::apiResource('service-reviews', ServiceReviewController::class);
 Route::apiResource('user-searches', UserSearchController::class);
 Route::apiResource('walkability-zones', WalkabilityZoneController::class);
-

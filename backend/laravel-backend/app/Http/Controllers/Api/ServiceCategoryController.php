@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\ServiceCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ServiceCategoryController extends Controller
 {
@@ -26,6 +27,10 @@ class ServiceCategoryController extends Controller
 
     public function show($id) {
         return response()->json(ServiceCategory::findOrFail($id));
+    }
+
+    public function list(){
+        return response()->json(DB::table('service_categories')->get());
     }
 
     public function update(Request $request, $id) {

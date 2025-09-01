@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\PublicService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB; // ← ini yang kamu butuh
+use Illuminate\Support\Facades\DB;
 
 
 class PublicServiceController extends Controller
@@ -37,6 +37,10 @@ class PublicServiceController extends Controller
         return response()->json(PublicService::findOrFail($id));
     }
 
+    public function list(){
+        return response()->json(DB::table('public_services')->get());
+    }
+    
     public function update(Request $request, $id) {
         $service = PublicService::findOrFail($id);
 

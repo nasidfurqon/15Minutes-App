@@ -44,7 +44,7 @@ class DistrictController extends Controller
 
         // 2. Jika ID tidak ditemukan, kembalikan error 404
         if (!$districtId) {
-            return response()->json(['message' => 'District not found'], 404);
+            return response()->json(['message' => 'District show by not found'], 404);
         }
 
         // 3. Jika ID ditemukan, panggil fungsi show() yang asli dengan ID tersebut.
@@ -72,7 +72,7 @@ class DistrictController extends Controller
         $district->polygon = json_decode($district->polygon_geojson);
 
         if (!$district) {
-            return response()->json(['message' => 'District not found'], 404);
+            return response()->json(['message' => 'District show not found'], 404);
         }
 
         // Ambil kelurahan terkait dengan GeoJSON polygon
@@ -96,6 +96,13 @@ class DistrictController extends Controller
         return response()->json($district);
     }
 
+    // Tampilkan list district 
+    public function list()
+    {
+        $districts = DB::table('districts')->get();
+        return response()->json($districts);
+    }
+
     /**
      * Tampilkan detail district tanpa polygon (ringkas)
      */
@@ -112,7 +119,7 @@ class DistrictController extends Controller
             ->first();
 
         if (!$district) {
-            return response()->json(['message' => 'District not found'], 404);
+            return response()->json(['message' => 'District detail not found'], 404);
         }
 
         return response()->json($district);

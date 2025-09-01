@@ -47,6 +47,11 @@ class KelurahanController extends Controller
         return response()->json($kelurahan);
     }
 
+    public function list(){
+        $kelurahans = DB::table('kelurahans')->get();
+        return response()->json($kelurahans);
+    }
+
     public function showInfo($id)
     {
         $kelurahan = DB::table('kelurahans')
