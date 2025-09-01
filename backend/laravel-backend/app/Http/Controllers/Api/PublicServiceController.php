@@ -38,7 +38,11 @@ class PublicServiceController extends Controller
     }
 
     public function list(){
-        return response()->json(DB::table('public_services')->get());
+        return response()->json(['data' => DB::table('public_services')->get()]);
+    }
+
+    public function count(){
+        return response()->json(['data' => DB::table('public_services')->count()]);
     }
     
     public function update(Request $request, $id) {

@@ -100,9 +100,12 @@ class DistrictController extends Controller
     public function list()
     {
         $districts = DB::table('districts')->get();
-        return response()->json($districts);
+        return response()->json(['data' => $districts]);
     }
 
+    public function count(){
+        return response()->json(['data' => DB::table('districts')->count()]);
+    }
     /**
      * Tampilkan detail district tanpa polygon (ringkas)
      */

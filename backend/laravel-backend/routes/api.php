@@ -35,11 +35,17 @@ Route::post('/region-info', [App\Http\Controllers\Api\DistrictController::class,
 // Mengarah ke fungsi baru: showByName
 Route::get('/districts/{name}', [DistrictController::class, 'showByName']);
 Route::get('/districts/{id}/detail', [DistrictController::class, 'detail']);
+
 Route::get('/list/districts', [DistrictController::class, 'list']);
 Route::get('/list/kelurahans', [KelurahanController::class, 'list']);
 Route::get('/list/public_services', [PublicServiceController::class, 'list']);
 Route::get('/list/service_categories', [ServiceCategoryController::class, 'list']);
 
+
+Route::get('/count/districts', [DistrictController::class, 'count']);
+Route::get('/count/kelurahans', [KelurahanController::class, 'count']);
+Route::get('/count/public_services', [PublicServiceController::class, 'count']);
+Route::get('/count/service_categories', [ServiceCategoryController::class, 'count']);
 // Endpoint untuk kelurahan berdasarkan NAMA
 // Mengarah ke fungsi baru: showByName
 Route::get('/kelurahans/{name}', [KelurahanController::class, 'showByName']);

@@ -30,7 +30,11 @@ class ServiceCategoryController extends Controller
     }
 
     public function list(){
-        return response()->json(DB::table('service_categories')->get());
+        return response()->json(["data" => DB::table('service_categories')->get()]);
+    }
+
+    public function count(){
+        return response()->json(['data' => DB::table('service_categories')->count()]);
     }
 
     public function update(Request $request, $id) {
