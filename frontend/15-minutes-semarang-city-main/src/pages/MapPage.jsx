@@ -40,12 +40,12 @@ const userPinIcon = L.icon({
 const SIMPANG_LIMA_COORDS = [-6.991, 110.423];
 
 // Batas koordinat kota Semarang (approximate bounding box)
-const SEMARANG_BOUNDS = {
-	north: -6.85, // Batas utara
-	south: -7.15, // Batas selatan
-	east: 110.55, // Batas timur
-	west: 110.25, // Batas barat
-};
+	const SEMARANG_BOUNDS = {
+		north: -6.85, // Batas utara
+		south: -7.15, // Batas selatan
+		east: 110.55, // Batas timur
+		west: 110.25, // Batas barat
+	};
 
 // Fungsi untuk mengecek apakah koordinat berada dalam batas kota Semarang
 const isWithinSemarang = (lat, lng) => {
@@ -113,6 +113,13 @@ const calculateDistance = (lat1, lng1, lat2, lng2) => {
 	return distance.toFixed(2);
 };
 
+
+import semarangGEOJSON from "../assets/semarang.json";
+
+const coordinates = semarangGEOJSON.features[0].geometry.coordinates;
+
+const semarangLine = coordinates[0][0].map((coord) => [coord[1], coord[0]]);
+``
 const MapPage = () => {
 	const [mapCenter, setMapCenter] = useState(SIMPANG_LIMA_COORDS);
 	const [userPin, setUserPin] = useState(null);
@@ -1355,7 +1362,8 @@ const MapPage = () => {
 							</button>
 						</div>
 					</div>
-				)}
+				)}	
+
 				<MapContainer
 					center={mapCenter}
 					zoom={15}
@@ -1365,7 +1373,7 @@ const MapPage = () => {
 				>
 					<TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 					<MapEvents onMapClick={handleMapClick} />
-
+					<Polygon positions={semarangLine} color="red" />
 					{userPin && <Marker position={userPin} icon={userPinIcon} />}
 
 					{showResults && (
