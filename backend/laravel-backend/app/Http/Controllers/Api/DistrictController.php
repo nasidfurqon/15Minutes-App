@@ -26,9 +26,40 @@ class DistrictController extends Controller
         return response()->json([
             'message' => 'District added successfully',
             'id'      => $districtId
-        ], 201);
+        ], 201);    
     }
 
+    public function edit(Request $request, $id){
+        $district = DB::table('districts')->where('id', $id)->first();
+
+        if (!$district) {
+            return response()->json(['message' => 'District not found'], 404);
+        }
+
+        $data = array_filter($request->all(), function($value) {
+            return !is_null($value);
+        });
+
+        if(!empty($data)) {
+            DB::table('districts')->where('id', $id)->update($data);
+        }
+
+         return response()->json([
+            'message' => 'districts updated successfully',
+            'id'      => $id
+        ], 200);
+    }
+
+    function delete($id){
+        $deleted = DB::table('districts')->where('id', $id)->delete();
+
+        if($deleted){
+            return response()->json(['message' => 'District deleted successfully'], 200);
+        }
+        else{
+            return response()->json(['message' => 'District not found'], 404);
+        }
+    }
     /**
      * Mencari ID kecamatan bedasarkan nama
      */

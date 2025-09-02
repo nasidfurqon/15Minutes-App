@@ -3,8 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use Dflydev\DotAccessData\Data;
+use Illuminate\Http\Client\ResponseSequence;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+
+use function PHPUnit\Framework\isEmpty;
 
 class KelurahanController extends Controller
 {
@@ -71,6 +75,38 @@ class KelurahanController extends Controller
             'message' => 'Kelurahan added successfully',
             'id'      => $kelurahanId
         ], 201);
+    }
+
+    public function edit(Request $request, $id)
+    {
+        $district = DB::table('kelurahans')->where('id', $id)->first();
+        if (!$district) {
+            return response()->json(['message' => 'Kelurahan not found'], 404);
+        }
+
+        $data = array_filter($request->all(), function($value) {
+            return !is_null($value);
+        });
+
+        if(!isEmpty($data)){
+            DB::table('kelurahans')->where('id', $id)->update($data);
+        }
+
+        return response()->json([
+            'message' => 'Kelurahan updated successfully',
+            'id' => $id
+        ], 201);
+    }
+
+    public function delete($id)
+    {
+        $deleted = DB::table('kelurahans')->where('id', $id)->delete();
+
+        if ($deleted) {
+            return response()->json(['message' => 'Kelurahan deleted successfully'], 200);
+        } else {
+            return response()->json(['message' => 'Kelurahan not found'], 404);
+        }
     }
     
     public function showInfo($id)

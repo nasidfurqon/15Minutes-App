@@ -7,6 +7,7 @@ use App\Models\PublicService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+use function PHPUnit\Framework\isEmpty;
 
 class PublicServiceController extends Controller
 {
@@ -33,6 +34,37 @@ class PublicServiceController extends Controller
         return response()->json(['messages' => 'Service added successfully', "id" => $service], 201);
     }
 
+    public function edit(Request $request, $id)
+    {
+        $service = DB::table('public_services')->where('id', $id)->first();
+        if (!$service) {
+            return response()->json(['message' => 'Service not found'], 404);
+        }
+
+        $data = array_filter($request->all(), function($value) {
+            return !is_null($value);
+        });
+
+        if(!isEmpty($data)){
+            DB::table('public_services')->where('id', $id)->update($data);
+        }
+
+        return response()->json([
+            'message' => 'Service updated successfully',
+            'id' => $id
+        ], 201);
+    }
+
+    public function delete($id)
+    {
+        $deleted = DB::table('public_services')->where('id', $id)->delete();
+
+        if ($deleted) {
+            return response()->json(['message' => 'Service deleted successfully'], 200);
+        } else {
+            return response()->json(['message' => 'Service not found'], 404);
+        }
+    }
     public function show($id) {
         return response()->json(PublicService::findOrFail($id));
     }

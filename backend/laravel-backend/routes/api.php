@@ -50,7 +50,14 @@ Route::get('/count/service_categories', [ServiceCategoryController::class, 'coun
 Route::post('/add/districts', [DistrictController::class, 'add']); 
 Route::post('/add/kelurahans', [KelurahanController::class, 'add']); 
 Route::post('/add/public_services', [PublicServiceController::class, 'add']);
-Route::post('/add/service_categories', [ServiceCategoryController::class, 'add']);
+
+Route::put("/edit/districts/{id}", [DistrictController::class, 'edit']);
+Route::put("/edit/kelurahans/{id}", [KelurahanController::class, 'edit']);
+Route::put("/edit/public_services/{id}", [PublicServiceController::class, 'edit']);
+
+Route::delete("/delete/districts/{id}", [DistrictController::class, 'delete']);
+Route::delete("/delete/kelurahans/{id}", [KelurahanController::class, 'delete']);
+Route::delete("/delete/public_services/{id}", [PublicServiceController::class, 'delete']);
 
 // Endpoint untuk kelurahan berdasarkan NAMA
 // Mengarah ke fungsi baru: showByName
