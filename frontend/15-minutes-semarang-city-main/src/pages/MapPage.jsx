@@ -1373,7 +1373,7 @@ const MapPage = () => {
 				>
 					<TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 					<MapEvents onMapClick={handleMapClick} />
-					<Polygon positions={semarangLine} color="red" />
+					<Polygon positions={semarangLine} pathOptions={{ color: 'red', weight: 5, fill: false }} />
 					{userPin && <Marker position={userPin} icon={userPinIcon} />}
 
 					{showResults && (
