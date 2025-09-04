@@ -22,6 +22,10 @@ import MainPage from './pages/MainPage';
 import MapPage from './pages/MapPage';
 import DashboardAdmin from './pages/DashboardAdmin';
 import Login from './pages/Login';
+import District from "./pages/admin/DistrictPage";
+import DashboardHome from "./pages/admin/DashboardHome";
+import PublicService from "./pages/admin/PublicServicePage";
+import Kelurahan from "./pages/admin/KelurahansPage";
 import './styles/responsive.css';
 
 const isAuthenticated = () => {
@@ -42,20 +46,28 @@ function MainPageWrapper() {
   return <MainPage onCheckLocation={() => navigate("/map")} />;
 }
 function App(){	
-	return(
-		<Router>
-			<Routes>
-				<Route path="/" element={<MainPageWrapper />} />
-				<Route path="/map" element={<MapPage />} />
-				<Route path="/admin/login" element={<Login />} />
-				<Route path="/admin/dashboard" element={
-					<ProtectedRoute>	
-						<DashboardAdmin />
-					</ProtectedRoute>
-				} />
-			</Routes>
-		</Router>
-	)
+	return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<MainPageWrapper />} />
+        <Route path="/map" element={<MapPage />} />
+        <Route path="/admin/login" element={<Login />} />
+        <Route
+          path="/admin/dashboard"
+          element={
+            <ProtectedRoute>
+              <DashboardAdmin />
+            </ProtectedRoute>
+          }
+        >
+          <Route index element={<DashboardHome />} />
+          <Route path="district" element={<District />} />
+          <Route path="public_service" element={<PublicService />} />
+          <Route path="kelurahan" element={<Kelurahan />} />
+        </Route>
+      </Routes>
+    </Router>
+  );
 }
 
 
