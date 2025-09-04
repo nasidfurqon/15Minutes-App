@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\ServiceReviewController;
 use App\Http\Controllers\Api\UserSearchController;
 use App\Http\Controllers\Api\WalkabilityZoneController;
 use App\Http\Controllers\Api\KelurahanController;
+use App\Http\Controllers\AuthController;
 use App\Models\District;
 
 /*
@@ -72,3 +73,7 @@ Route::apiResource('service-images', ServiceImageController::class);
 Route::apiResource('service-reviews', ServiceReviewController::class);
 Route::apiResource('user-searches', UserSearchController::class);
 Route::apiResource('walkability-zones', WalkabilityZoneController::class);
+
+
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
