@@ -62,7 +62,7 @@ function App(){
         >
           <Route index element={<DashboardHome />} />
           <Route path="district" element={<District />} />
-          <Route path="public_service" element={<PublicService />} />
+          <Route path="public-service" element={<PublicService />} />
           <Route path="kelurahan" element={<Kelurahan />} />
         </Route>
       </Routes>

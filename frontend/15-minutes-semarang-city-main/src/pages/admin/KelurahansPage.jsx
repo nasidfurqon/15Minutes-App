@@ -36,12 +36,12 @@ export default function Kelurahan() {
     <div className="p-6">
       {/* Header */}
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold text-gray-800">District</h1>
+        <h1 className="text-2xl font-bold text-gray-800">Kelurahan</h1>
         <button
-          onClick={() => alert("TODO: form Add District")}
+          onClick={() => alert("TODO: form Add Kelurahan")}
           className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg shadow transition"
         >
-          + Add District
+          + Add Kelurahan
         </button>
       </div>
 
@@ -66,13 +66,13 @@ export default function Kelurahan() {
                     <td className="px-6 py-3">{k.name}</td>
                     <td className="px-6 py-3 text-center space-x-2">
                       <button
-                        onClick={() => alert(`TODO: edit district ${d.id}`)}
+                        onClick={() => alert(`TODO: edit kelurahan ${k.id}`)}
                         className="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded transition"
                       >
                         Edit
                       </button>
                       <button
-                        onClick={() => handleDelete(d.id)}
+                        onClick={() => handleDelete(k.id)}
                         className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded transition"
                       >
                         Delete
@@ -86,7 +86,7 @@ export default function Kelurahan() {
                     colSpan="3"
                     className="px-6 py-4 text-center text-gray-500"
                   >
-                    Tidak ada data district
+                    Tidak ada data kelurahan
                   </td>
                 </tr>
               )}
