@@ -97,14 +97,12 @@ export default function AddPublicServicePage() {
             lat: position[0],
             lng: position[1],
         },
-        // Laravel expect string, tapi default bisa "{}"
-        opening_hours: formData.opening_hours?.trim() || "-",
         rating: formData.rating ? Number(formData.rating) : 0,
         is_active: true,
         }),
 
       });
-
+      console.log("Response diterima CEK:", position[0], position[1]);
       if (!res.ok) throw new Error("Gagal menambah public service");
       setSuccess("Public service berhasil ditambahkan!");
       setFormData({
@@ -211,7 +209,7 @@ export default function AddPublicServicePage() {
             onChange={handleChange}
           />
         </div>
-        <div>
+        {/* <div>
           <label className="block font-medium mb-1">Jam Buka</label>
           <input
             type="text"
@@ -220,7 +218,7 @@ export default function AddPublicServicePage() {
             value={formData.opening_hours}
             onChange={handleChange}
           />
-        </div>
+        </div> */}
         <div>
           <label className="block font-medium mb-1">Rating</label>
           <input
