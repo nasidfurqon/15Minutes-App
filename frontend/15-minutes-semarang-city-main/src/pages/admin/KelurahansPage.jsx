@@ -35,20 +35,14 @@ export default function Kelurahan() {
   return (
     <div className="p-6">
       {/* Header */}
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold text-gray-800">Kelurahan</h1>
-        <button
-          onClick={() => alert("TODO: form Add Kelurahan")}
-          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg shadow transition"
-        >
-          + Add Kelurahan
-        </button>
-      </div>
-
+      
       {/* Card Tabel */}
       <div className="bg-white shadow-md rounded-xl overflow-hidden">
         {loading ? (
-          <p className="p-4 text-gray-600">Loading...</p>
+          <div className="flex flex-col items-center justify-center p-8">
+            <div className="animate-spin rounded-full h-10 w-10 border-t-4 border-blue-500 border-solid mb-2"></div>
+            <p className="text-gray-600">Loading...</p>
+          </div>
         ) : (
           <table className="w-full table-auto">
             <thead className="bg-gray-100 text-gray-700">

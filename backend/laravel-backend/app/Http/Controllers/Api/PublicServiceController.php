@@ -24,15 +24,41 @@ class PublicServiceController extends Controller
             'phone' => 'nullable|string|max:20',
             'email' => 'nullable|email|max:100',
             'address' => 'nullable|string',
-            'location' => 'required',
-            'opening_hours' => 'nullable|json',
+            'location' => 'required|array', // lat & lng
+            'location.lat' => 'required|numeric',
+            'location.lng' => 'required|numeric',
+            'opening_hours' => 'nullable|string', // simpan JSON sebagai string
             'rating' => 'nullable|numeric|min:0|max:5',
-            'is_active' => 'boolean'
+            'is_active' => 'nullable|boolean'
         ]);
 
-        $service = DB::table('public_services')->insertGetId($validated);
-        return response()->json(['messages' => 'Service added successfully', "id" => $service], 201);
+        // Set default values "-"
+        $data = [
+            'name' => $validated['name'],
+            'category_id' => $validated['category_id'],
+            'description' => $validated['description'] ?? '-',
+            'website' => $validated['website'] ?? '-',
+            'phone' => $validated['phone'] ?? '-',
+            'email' => $validated['email'] ?? '-',
+            'address' => $validated['address'] ?? '-',
+            'opening_hours' => $validated['opening_hours'] ?? '-',
+            'rating' => $validated['rating'] ?? 0,
+            'is_active' => $validated['is_active'] ?? true,
+        ];
+
+        // Konversi lokasi ke POINT (PostGIS)
+        $lat = $validated['location']['lat'];
+        $lng = $validated['location']['lng'];
+        $data['location'] = DB::raw("ST_SetSRID(ST_MakePoint($lng, $lat), 4326)");
+
+        $id = DB::table('public_services')->insertGetId($data);
+
+        return response()->json([
+            'message' => 'Service added successfully',
+            'id' => $id
+        ], 201);
     }
+
 
     public function edit(Request $request, $id)
     {
