@@ -10,30 +10,23 @@ class CorsMiddleware
 {
     public function handle(Request $request, Closure $next): Response
     {
-        $response = $next($request);
-        
-        // Izinkan akses dari localhost dan network IP
-        $allowedOrigins = [
-            'http://localhost:5173',
-            'http://127.0.0.1:5173',
-            'http://192.168.1.5:5173',
-            'http://192.168.100.2:5173',
-            'http://192.168.139.1:5173',
-            'http://192.168.232.1:5173',
-            // Tambahkan IP lain jika diperlukan
+        $headers = [
+            'Access-Control-Allow-Origin' => '*', // izinkan semua origin
+            'Access-Control-Allow-Methods' => 'GET, POST, PUT, DELETE, OPTIONS',
+            'Access-Control-Allow-Headers' => 'Content-Type, Authorization, X-Requested-With',
+            'Access-Control-Allow-Credentials' => 'true',
         ];
-        
-        $origin = $request->header('Origin');
-        
-        // Izinkan semua origin yang menggunakan port 5173 (development)
-        if (preg_match('/^http:\/\/(localhost|127\.0\.0\.1|\d+\.\d+\.\d+\.\d+):5173$/', $origin)) {
-            $response->headers->set('Access-Control-Allow-Origin', $origin);
+
+        if ($request->getMethod() === "OPTIONS") {
+            return response()->json('OK', 200, $headers);
         }
-        
-        $response->headers->set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-        $response->headers->set('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
-        $response->headers->set('Access-Control-Allow-Credentials', 'true');
-        
+
+        $response = $next($request);
+
+        foreach ($headers as $key => $value) {
+            $response->headers->set($key, $value);
+        }
+
         return $response;
     }
 }

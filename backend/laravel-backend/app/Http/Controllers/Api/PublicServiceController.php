@@ -15,50 +15,29 @@ class PublicServiceController extends Controller
         return response()->json(PublicService::all());
     }
 
-    public function add(Request $request) {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'category_id' => 'required|exists:service_categories,id',
-            'description' => 'nullable|string',
-            'website' => 'nullable|string|max:255',
-            'phone' => 'nullable|string|max:20',
-            'email' => 'nullable|email|max:100',
-            'address' => 'nullable|string',
-            'location' => 'required|array', // lat & lng
-            'location.lat' => 'required|numeric',
-            'location.lng' => 'required|numeric',
-            'opening_hours' => 'nullable|string', // simpan JSON sebagai string
-            'rating' => 'nullable|numeric|min:0|max:5',
-            'is_active' => 'nullable|boolean'
-        ]);
-
-        // Set default values "-"
-        $data = [
-            'name' => $validated['name'],
-            'category_id' => $validated['category_id'],
-            'description' => $validated['description'] ?? '-',
-            'website' => $validated['website'] ?? '-',
-            'phone' => $validated['phone'] ?? '-',
-            'email' => $validated['email'] ?? '-',
-            'address' => $validated['address'] ?? '-',
-            'opening_hours' => $validated['opening_hours'] ?? '-',
-            'rating' => $validated['rating'] ?? 0,
-            'is_active' => $validated['is_active'] ?? true,
-        ];
-
-        // Konversi lokasi ke POINT (PostGIS)
-        $lat = $validated['location']['lat'];
-        $lng = $validated['location']['lng'];
-        $data['location'] = DB::raw("ST_SetSRID(ST_MakePoint($lng, $lat), 4326)");
-
-        $id = DB::table('public_services')->insertGetId($data);
-
-        return response()->json([
-            'message' => 'Service added successfully',
-            'id' => $id
+    public function add(Request $request)
+    {
+        $lat = $request->input('location.lat');
+        $lng = $request->input('location.lng');
+        $publicServiceId = DB::table('public_services')->insertGetId(
+            [
+                'name'=> $request->input('name', null),
+                'category_id' => $request->input('category_id', null),
+                'description' => $request->input('description', null),
+                'phone' => $request->input('phone', null),
+                'email' => $request->input('email', null),
+                'address' => $request->input('address', null),
+                'website' => $request->input('website', null),
+                'location'    => DB::raw("ST_SetSRID(ST_MakePoint($lng, $lat), 4326)"),
+                'is_active' => $request->input('is_active', true),
+            ]
+        );
+        
+         return response()->json([
+            'message' => 'Public Service added successfully',
+            'id'      => $publicServiceId
         ], 201);
     }
-
 
     public function edit(Request $request, $id)
     {
